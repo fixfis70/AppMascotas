@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    
+
     android:layout_height="wrap_content">
     <LinearLayout
         android:padding="20dp"
@@ -12,17 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:id="@+id/txtnombre"
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="Nombre mascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/txtcolor"
             android:textSize="14sp"
             android:text="Color mascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/txtpeso"
             android:textSize="10sp"
             android:text="Peso mascota"
             android:layout_width="wrap_content"
@@ -37,10 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
+            android:id="@+id/btnedit"
             android:text="Editar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/btndlt"
             android:text="Eliminar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -52,9 +53,8 @@ public class ListarCustom extends AppCompatActivity implements MascotasAdapter.O
         v.setLayoutManager(new LinearLayoutManager(this));
         v.setAdapter(adapter);
 
-        Metrics.valores.put("listar_custom_refresh", (Runnable) () -> {
-            Toast.makeText(this,"Testeando!",Toast.LENGTH_SHORT).show();
-        });
+        Metrics.valores.put("listar_custom_refresh", (Runnable) this::drawData);
+
         drawData();
 
     }
@@ -92,7 +92,23 @@ public class ListarCustom extends AppCompatActivity implements MascotasAdapter.O
 
     @Override
     public void onDelete(int position, Mascota m) {
-        adapter.eliminarItem(position);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                Metrics.ip + "/mascotas/" + m.getId(),
+                null,
+                j->{
+                    adapter.eliminarItem(position);
+                    try {
+                        Toast.makeText(this,j.getString("msg"),Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                Throwable::printStackTrace
+        );
+
+        q.add(jsonObjectRequest);
+
     }
 
     @Override
